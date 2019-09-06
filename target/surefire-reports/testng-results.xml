@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="10344" started-at="2019-09-06T15:20:07Z" finished-at="2019-09-06T15:20:17Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="10344" started-at="2019-09-06T15:20:07Z" finished-at="2019-09-06T15:20:17Z">
+      <class name="demoTest.logintest">
+        <test-method status="PASS" signature="setup()" name="setup" is-config="true" duration-ms="4902" started-at="2019-09-06T15:20:07Z" finished-at="2019-09-06T15:20:12Z">
+        </test-method>
+        <test-method status="PASS" signature="login()" name="login" duration-ms="4744" started-at="2019-09-06T15:20:12Z" finished-at="2019-09-06T15:20:17Z">
+        </test-method>
+        <test-method status="PASS" signature="login2()" name="login2" duration-ms="16" started-at="2019-09-06T15:20:17Z" finished-at="2019-09-06T15:20:17Z">
+        </test-method>
+        <test-method status="PASS" signature="teardown()" name="teardown" is-config="true" duration-ms="673" started-at="2019-09-06T15:20:17Z" finished-at="2019-09-06T15:20:17Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

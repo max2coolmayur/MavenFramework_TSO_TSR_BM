@@ -1,0 +1,75 @@
+package org.qa.actions;
+
+import org.gs4tr.qa.utility.BrowserFactory;
+import org.qa.locators.PD4_main_Locators;
+
+public class General {
+	public static void pd4_logIn(String user, String passw) throws Exception {
+		System.out.println("In Method-  pd4_logIn() \n");
+		//isPresent(PD4_main_Locators.exts().inputLoginUsername);
+		BrowserFactory.verifyElementPresent(PD4_main_Locators.exts().inputLoginUsername, 80);
+		BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().inputLoginUsername).sendKeys(user);
+		Thread.sleep(2000);
+		BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().inputLoginPassword).sendKeys(passw);
+		Thread.sleep(2000);
+		BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().loginButton).click();
+		Thread.sleep(3000);
+		
+		if(BrowserFactory.verifyElementPresent(PD4_main_Locators.exts().WarningWithTextPasswExpired,10)==true)
+		{
+			BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().inputLoginOldPassword).sendKeys(passw);
+			Thread.sleep(2000);
+			BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().inputLoginNewPassword).sendKeys("password2!");
+			Thread.sleep(2000);
+			BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().inputLoginNewPasswordRepeat).sendKeys("password2!");
+			Thread.sleep(2000);
+			BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().passwordExpired_okButton).click();
+			Thread.sleep(4000);
+			
+			if(BrowserFactory.verifyElementPresent(PD4_main_Locators.exts().preferences_ChangePassword_warning_close_btn,5)){
+			 BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().preferences_ChangePassword_warning_close_btn).click();
+			 Thread.sleep(2000);
+			}
+			//General.action().cacheRefresh();
+			BrowserFactory.verifyElementPresent(PD4_main_Locators.exts().admin_accountButton,30);
+			BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().admin_accountButton).click();
+			Thread.sleep(2000);
+			BrowserFactory.verifyElementPresent(PD4_main_Locators.exts().preferencesButton,10);
+			BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().preferencesButton).click();
+			Thread.sleep(2000);
+			BrowserFactory.verifyElementPresent(PD4_main_Locators.exts().preferences_changePasswordButton,10);
+			BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().preferences_changePasswordButton).click();
+			Thread.sleep(2000);
+			BrowserFactory.verifyElementPresent(PD4_main_Locators.exts().preferences_general_inputOldPassword,10);
+			BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().preferences_general_inputOldPassword).sendKeys("password2!");
+			Thread.sleep(500);
+			BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().preferences_general_inputNewPassword).sendKeys("password1!");
+			Thread.sleep(500);
+			BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().preferences_general_inputRpeatNewPassword).sendKeys("password1!");
+			Thread.sleep(2000);
+		//	BrowserFactory..selenium.fireEvent(PD4_main_Locators.exts().preferences_general_inputRpeatNewPassword, "blur");
+			
+			if(BrowserFactory.verifyElementPresent(PD4_main_Locators.exts().preferences_ChangePassword_OkButton,10)){
+				BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().preferences_ChangePassword_OkButton).click();
+				Thread.sleep(2000);
+			}
+			//<s> Click 'Close' and then 'OK' </s>
+			BrowserFactory.verifyElementPresent(PD4_main_Locators.exts().preferences_ChangePassword_warning_close_btn,10);
+			BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().preferences_ChangePassword_warning_close_btn).click();
+			Thread.sleep(2000);
+			BrowserFactory.verifyElementPresent(PD4_main_Locators.exts().preferences_OkButton,10);
+			BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().preferences_OkButton).click();
+			Thread.sleep(2000);	
+		}
+		
+		if(BrowserFactory.verifyElementPresent(PD4_main_Locators.exts().preferences_ChangePassword_warning_close_btn,5)){
+		 BrowserFactory.SystemEngine().findElement(PD4_main_Locators.exts().preferences_ChangePassword_warning_close_btn).click();
+		 Thread.sleep(2000);
+		}
+		
+		BrowserFactory.verifyElementPresent(PD4_main_Locators.exts().admin_accountButton, 5);
+		System.out.println("\nLogin by -> "+user+"\n");
+		Thread.sleep(2000);	
+	}
+
+}

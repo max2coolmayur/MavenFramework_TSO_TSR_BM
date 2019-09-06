@@ -1,0 +1,4 @@
+url=http://10.10.222.74:8080/PD/login
+browser=Chrome
+username=admin
+password=password1!

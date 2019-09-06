@@ -1,0 +1,91 @@
+#Selenium Data
+#Host machine to run test
+host = 
+#Specified browser type
+browser = googlechrome
+#Speed in milliseconds
+speed = 500
+#Sleep delay in milliseconds
+sleep = 5
+
+#URL address
+#url = http://10.10.222.71:8080/PD/
+url = http://10.10.222.74:8080/PD/
+#url = http://10.10.222.47:8085/PD/
+#url = http://10.10.222.45:8080/PD/
+#url = http://10.10.222.50:8080/PD/
+
+#url = http://10.10.222.26:8085/TRP/
+#url = http://10.10.222.71:8085/TRP/
+
+
+# TSR and TSO URLs 
+TSO_URL = http://10.10.222.213:9999
+TSR_URL = http://10.10.222.213:9998
+
+#TSO_URL = http://10.10.222.71:9999
+#TSR_URL = http://10.10.222.71:9998
+
+#TRP URL address
+#PD_trpUrl = http://10.10.95.180:8080/trp/xmlrpc
+PD_trpUrl = http://10.10.222.74:8085/TRP/
+
+
+#Project Director Data
+#Version
+PD_version = 5.8.0
+#Copyright
+PD_copyright = 2000-2016 © Translations.com All rights reserved. About GlobalLink Project Director
+
+
+#FTP URL and Details
+PD_ftpUrl = 10.10.222.31
+FTP_userName = ftp_new
+FTP_password = password
+
+#FTP Files Path
+FTP_Files_Path= /
+
+
+#Translation Memory Server URL
+TM_Server_URL = 10.10.222.31:47110
+
+
+#TRP Email Server Host, UserName and Password.
+mailServerURL = gltrp.com
+mailUserName = trpauto@gltrp.com
+mailPassword = password
+
+
+#Automation Resource Data
+#Directory for temporary files 
+tmpDir = D:\\bld-dt-main\\QA\\Automation_resources\\tmp
+
+#Directory's for downloading and uploading Submissions for translations.
+#Directory for Download submission
+#downloadSubDir =C:\\Users\\A\\Downloads\\
+downloadSubDir =C:\\Users\\mkadam\\Downloads\\
+#C:\\Users\\Dima\\Downloads\\
+#Directory for Pseudotranslating  submission
+translateSubDir = C:\\Users\\Dima\\target
+#Directory for Uploading submission
+uploadSubDir = C:\\Users\\Alex\\Upload\\
+testdatapath = D:\\Test harness workspace\\PD_4_2\\data\\
+
+#PD Database data
+#PD Database connection URL
+databaseURL = 192.168.112.137:3306
+#Database name
+databaseName = pd42
+#Database user with access to PD tables
+databaseUserName = pd4
+#Database user password 
+databaseUserPassword = pd4
+
+
+#Test Plan ID
+TL_testPlanID = 633530
+#Build ID
+TL_buildID = 1916
+#Platform ID
+TL_platformID = 304
