@@ -19,30 +19,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/commons-lang-2.5.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/commons-net-3.1.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/james-server-cli-3.0-beta4.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/james-server-data-api-3.0-beta4.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/json-simple-1.1.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/junit-4.10.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/logging-selenium-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/mail-1.4.5.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/mysql-connector-java-3.0.17-ga-bin.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/PD_Webdriver_Jar2017_Sept.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/poi-3.8-20120326.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/poi-ooxml-3.8-20120326.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/poi-ooxml-schemas-3.8-20120326.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/selenium-java-2.39.0.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/selenium-java-2.53.1.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/selenium-server-standalone-2.39.0.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/selenium-server-standalone-2.53.1.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/TestRail_framework_Feb_2017.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/ws-commons-util-1.0.2.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/xmlbeans-2.3.0.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/xmlrpc-client-3.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/xmlrpc-common-3.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/TSO-TSR-Testrail/TSO_TSR_511/lib/xmlrpc-server-3.1.3.jar"/>
+	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

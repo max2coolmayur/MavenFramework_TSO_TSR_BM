@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="7044" started-at="2019-09-03T10:22:15Z" finished-at="2019-09-03T10:22:22Z">
+  <suite name="Default suite" duration-ms="68218" started-at="2019-09-11T18:09:41 IST" finished-at="2019-09-11T18:10:50 IST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="7044" started-at="2019-09-03T10:22:15Z" finished-at="2019-09-03T10:22:22Z">
-      <class name="demoTest.logintest">
-        <test-method status="PASS" signature="setup()[pri:0, instance:demoTest.logintest@28d25987]" name="setup" is-config="true" duration-ms="4953" started-at="2019-09-03T15:52:15Z" finished-at="2019-09-03T15:52:20Z">
+    <test name="Default test" duration-ms="68218" started-at="2019-09-11T18:09:41 IST" finished-at="2019-09-11T18:10:50 IST">
+      <class name="tso.help_tab.BM_TSO_830638">
+        <test-method status="PASS" signature="setup()[pri:0, instance:tso.help_tab.BM_TSO_830638@1f7030a6]" name="setup" is-config="true" duration-ms="2407" started-at="2019-09-11T18:09:41 IST" finished-at="2019-09-11T18:09:44 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method status="PASS" signature="login()[pri:0, instance:demoTest.logintest@28d25987]" name="login" duration-ms="2076" started-at="2019-09-03T15:52:20Z" finished-at="2019-09-03T15:52:22Z">
+        <test-method status="PASS" signature="testcase()[pri:0, instance:tso.help_tab.BM_TSO_830638@1f7030a6]" name="testcase" duration-ms="59831" started-at="2019-09-11T18:09:44 IST" finished-at="2019-09-11T18:10:44 IST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- login -->
-        <test-method status="PASS" signature="teardown()[pri:0, instance:demoTest.logintest@28d25987]" name="teardown" is-config="true" duration-ms="0" started-at="2019-09-03T15:52:22Z" finished-at="2019-09-03T15:52:22Z">
+        </test-method> <!-- testcase -->
+        <test-method status="PASS" signature="teardown()[pri:0, instance:tso.help_tab.BM_TSO_830638@1f7030a6]" name="teardown" is-config="true" duration-ms="5948" started-at="2019-09-11T18:10:44 IST" finished-at="2019-09-11T18:10:50 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->
-      </class> <!-- demoTest.logintest -->
+      </class> <!-- tso.help_tab.BM_TSO_830638 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

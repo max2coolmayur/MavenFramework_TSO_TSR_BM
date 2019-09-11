@@ -5,9 +5,11 @@ import java.util.LinkedHashMap;
 import org.gs4tr.qa.utility.BrowserFactory;
 import org.openqa.selenium.WebDriver;
 import org.qa.actions.common_methods;
+import org.qa.locators.TSO_TSR_BM_locators;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 /*********************************************************************************************************************
@@ -33,36 +35,21 @@ public class logintest extends BrowserFactory{
 		dataSet.put("TL_test_case_description",
 				" TSO-8175:Disable Preview Translation checked/unchecked");
 		dataSet.put("TL_internal_testCase_ID", "8175");
-		
-		driver=BrowserFactory.startApplication();
+		driver=BrowserFactory.SystemEngine().startApplication();
 	}
 	
 	//Actual test case validations
 	@Test
+	@Parameters({"browser"})
 	public void login() throws InterruptedException
 	{
 		try{
 		//Login to PD	
-		common_methods.exts().login();
-		
-		Assert.assertTrue(driver.getTitle().contains("Project Director"));
-		
-		
-	} 	catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-   }
-	@Test
-	public void login2() throws InterruptedException
-	{
-		try{
-		//Login to PD	
-		//common_methods.exts().login();
-		
-		Assert.assertTrue(driver.getTitle().contains("Project Director"));
-		
+				Assert.assertTrue(BrowserFactory.SystemEngine().verifyElementPresent(TSO_TSR_BM_locators.exts().inputLoginUsername, 5));
+			
+
+			common_methods.exts().login("admin", "password1!");
+			
 		
 	} 	catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -70,16 +57,7 @@ public class logintest extends BrowserFactory{
 		}
 	
    }
-	
-	/*
-	 * //Report public void report(String result, String notes) throws Exception {
-	 * TestRailClient.testRailReportByID_production(dataSet.get(
-	 * "TL_internal_testCase_ID"),TSO_TSR_TestRail_Common_Properties.idTestPlan,
-	 * TSO_TSR_TestRail_Common_Properties.idBuild,result,
-	 * TSO_TSR_TestRail_Common_Properties.assignedTo,notes); if(result == "f")
-	 * assertTrue(false, ""); }
-	 */
-	
+		
 	//After execution post settings if any & close the browser.
 		@AfterClass
 		public void teardown()

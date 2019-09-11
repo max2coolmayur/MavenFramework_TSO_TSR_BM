@@ -11,10 +11,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,7 +26,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 */
 public class BrowserFactory {
-	public static  WebDriver driver;
+	public static   WebDriver driver;
 	private static BrowserFactory testSystem;
 	public static Properties prop;
 	public Properties properties = new Properties();
@@ -43,7 +43,6 @@ public class BrowserFactory {
 		}
 		return testSystem;
 	}
-	
 	public BrowserFactory(){
 		try {
 			prop = new Properties();
@@ -56,37 +55,49 @@ public class BrowserFactory {
 			e.printStackTrace();
 		}
 	}
-	public static WebDriver startApplication()
+	@SuppressWarnings("deprecation")
+	public WebDriver startApplication()
 	{
-		String browName = prop.getProperty("browser");
+		String browName = prop.getProperty("browserName");
 		
 		try {
-			if(browName.equals("Chrome"))
+			if(browName.equalsIgnoreCase("Chrome"))
 			{
 				System.setProperty("webdriver.chrome.driver", "./Drivers/ChromeDriver.exe");
-				ChromeOptions options = new ChromeOptions();
-				options.addArguments("disable-infobars");
-				driver=new ChromeDriver(options);
+				//to remove chrome notification use this if required
+				/*	ChromeOptions options = new ChromeOptions();
+			
+				 * options.addArguments("disable-infobars"); driver=new ChromeDriver(options);
+				 */
+				driver=new ChromeDriver();
 				driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 				
 			}
-			else if(browName.equals("Firefox"))
+			else if(browName.equalsIgnoreCase("Firefox"))
 			{
 				System.setProperty("webdriver.gecko.driver", "./Drivers/geckodriver.exe");
 				driver=new FirefoxDriver();
-				driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+				driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 			}
-			else if(browName.equals("IE"))
+			else if(browName.equalsIgnoreCase("IE"))
 			{
 				System.setProperty("webdriver.ie.driver", "./Drivers/IEDriverServer.exe");
-				driver=new InternetExplorerDriver();
-				driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+				/*
+				 * driver=new InternetExplorerDriver();
+				 * driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+				 */				
+				
+				// Setting attribute native Events to false enable click button in IE
+				DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer(); 
+				capabilities.setCapability("nativeEvents",false);
+				capabilities.setCapability("ignoreZoomSetting", true);
+				driver = new  InternetExplorerDriver(capabilities);
 			}
-			else if(browName.equals("Edge"))
+			else if(browName.equalsIgnoreCase("Edge"))
 			{
 				System.setProperty("webdriver.edge.driver", "./Drivers/MicrosoftWebDriver.exe");
 				driver=new EdgeDriver();
-				driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+				driver.manage().timeouts().pageLoadTimeout(50, TimeUnit.SECONDS);
 			}
 			else
 			{
@@ -104,6 +115,7 @@ public class BrowserFactory {
 			driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
 			
 			driver.get(prop.getProperty("url"));
+			writeToLog("Init|");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -131,7 +143,7 @@ public class BrowserFactory {
 		return driver.findElement(By.name(locator));
 	}
 
-	public static boolean verifyElementPresent(String tagName, int second)
+	public boolean verifyElementPresent(String tagName, int second)
 			throws Exception {
 		boolean result = false;
 		try{
@@ -154,21 +166,219 @@ public class BrowserFactory {
 		}
 		return result;
 	}
-
 	
-	@SuppressWarnings("static-access")
-	public void writeToLog(String message)
-	{
-	((JavascriptExecutor)BrowserFactory.SystemEngine().driver).executeScript("type=\""+message+"\"");
+	/** try using web driver wait
+	 * Verifies an element is not present in the current page loaded in the
+	 * browser. Used to confirm the presence of an element without breaking the
+	 * test and returning a boolean.
+	 * 
+	 * @param tagName
+	 *            name of element to verify if present.
+	 * 
+	 * @param second
+	 *            value in seconds to wait for an element.
+	 * 
+	 * @return boolean condition of element's existence.
+	 * 
+	 * @throws Exception
+	 *             used by Thread.sleep, which requires an exception handler.
+	 */
+	public boolean verifyElementNotPresent(String tagName, int second)
+			throws Exception {
+		boolean result = true;
+		try
+		{
+			BrowserFactory.SystemEngine();
+			WebDriverWait wait = new WebDriverWait(BrowserFactory.driver,second);
+			if(tagName.indexOf("/")!=0)
+			{
+				System.out.println("//");
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(tagName)));
+			}
+			else
+			{
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(tagName)));
+			}
+			result=false;
+		}
+		catch(Exception e)
+		{
+			System.err.print(e);
+			
+			//throw new Exception(e);
+		}
+		BrowserFactory.SystemEngine().writeVerifyToLog("verifyElementNotPresent",tagName,"true",result+"");
+		return result;
 	}
 	
-	@SuppressWarnings("static-access")
+	/** Verifies an element is visible in the current page loaded in the browser.
+	 * Used to confirm the presence of an element without breaking the test and
+	 * returning a boolean.
+	 * 
+	 * @param tagName
+	 *            name of element to verify if Visible.
+	 * 
+	 * @param second
+	 *            value in seconds to wait for an element.
+	 * 
+	 * @return boolean condition of element's existence.
+	 * 
+	 * @throws Exception
+	 *             used by Thread.sleep, which requires an exception handler.
+	 */
+	public boolean verifyElementIsVisible(String tagName, int second)
+			throws Exception {
+		boolean result = false;
+		try{
+			BrowserFactory.SystemEngine();
+			WebDriverWait wait = new WebDriverWait(BrowserFactory.driver,second);
+			if(tagName.indexOf("/")!=0)
+			{
+				System.out.println("//");
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(tagName)));
+			}
+			else
+			{
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(tagName)));
+			}
+			result=true;
+			
+			
+		}
+		catch(Exception e)
+		{
+			System.err.print(e);
+			//throw new Exception(e);
+		}
+		return result;
+	}
+
+	/** Verifies an element is not visible in the current page loaded in the
+	 * browser. Used to confirm the absence of an element without breaking the
+	 * test and returning a boolean.
+	 * 
+	 * @param tagName
+	 *            name of element to verify if present.
+	 * 
+	 * @param second
+	 *            value in seconds to wait for an element.
+	 * 
+	 * @return boolean condition of element's existence.
+	 * 
+	 * @throws Exception
+	 *             used by Thread.sleep, which requires an exception handler.
+	 */
+	public boolean verifyElementIsNotVisible(String tagName, int second)
+			throws Exception {
+		boolean result=true;
+		try
+		{
+			BrowserFactory.SystemEngine();
+			WebDriverWait wait = new WebDriverWait(BrowserFactory.driver,second);
+			if(tagName.indexOf("/")!=0)
+			{
+				System.out.println("//");
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(tagName)));
+			}
+			else
+			{
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(tagName)));
+			}
+			result=false;
+		}
+		catch(Exception e)
+		{
+			System.err.print(e);
+			
+			//throw new Exception(e);
+		}
+		
+		return result;
+		
+	}
+	
+	public static void writeToLog(String message)
+	{
+	BrowserFactory.SystemEngine();
+	((JavascriptExecutor)BrowserFactory.driver).executeScript("type=\""+message+"\"");
+	}
+	
 	public void writeVerifyToLog(String command,String element,String expectedValue,String result)
 	{
-	((JavascriptExecutor)BrowserFactory.SystemEngine().driver).executeScript("type=\""+"Verify|"+command+"|"+element+"|"+expectedValue+"|"+result+"|\"");
+	BrowserFactory.SystemEngine();
+	((JavascriptExecutor)BrowserFactory.driver).executeScript("type=\""+"Verify|"+command+"|"+element+"|"+expectedValue+"|"+result+"|\"");
 	}
 	
+	/**There is no way we can check a text is present on a page. we can check text of element.
+	 * 
+	 * Verifies text is present in the current page loaded in the browser. Used
+	 * to confirm the presence of an element without breaking the test and
+	 * returning a boolean.
+	 * 
+	 * @param text
+	 *            text of element to verify if present.
+	 * 
+	 * @param second
+	 *            value in seconds to wait for an element.
+	 * 
+	 * @return boolean condition of element's existence.
+	 * 
+	 * @throws Exception
+	 *             used by Thread.sleep, which requires an exception handler.
+	 */
+	public boolean verifyTextPresent(String text, int second) throws Exception {
+		  for (int _second = 0;; _second++) {
+		   if (_second >= second)
+		   {    
+		    return false;
+		   }
+		   try {
+//		    if (TestSystem.SystemEngine().selenium1.getBodyText().contains(text))
+			if (BrowserFactory.driver.findElement(By.tagName("body")).getText().contains(text))
+		     return true;
+		   } catch (Exception e) {
+		   }
+		   Thread.sleep(1000);
+		  }
+		 }
 	
+	
+	/**There is no way we can check a text is present on a page. we can check text of element.
+	 * 
+	 * Verifies text is not present in the current page loaded in the browser.
+	 * Used to confirm the absence of an element without breaking the test and
+	 * returning a boolean.
+	 * 
+	 * @param text
+	 *            text of element to verify if present.
+	 * 
+	 * @param second
+	 *            value in seconds to wait for an element.
+	 * 
+	 * @return boolean condition of element's existence.
+	 * 
+	 * @throws Exception
+	 *             used by Thread.sleep, which requires an exception handler.
+	 */
+	
+	
+	public boolean verifyTextNotPresent(String text, int second)
+			   throws Exception {
+			  for (int _second = 0;; _second++) {
+			   if (_second >= second)
+			   {
+				   return false;
+			   }
+			   try {
+					//			    if (!TestSystem.SystemEngine().selenium1.getBodyText().contains(text))
+					if (!BrowserFactory.driver.findElement(By.tagName("body")).getText().contains(text))
+			     return true;
+			   } catch (Exception e) {
+			   }
+			   Thread.sleep(1000);
+			  }
+			 }
+
 	
 	
 	
